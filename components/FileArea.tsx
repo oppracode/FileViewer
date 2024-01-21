@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFiles } from '../features/dropboxSlice';
-import { RootState } from '../store';
+import { RootState } from '../store/store';
 
 import FileCard from './ItemCard';
 

@@ -1,8 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TouchableOpacity, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import FileViewerScreen from "../screens/FileViewerScreen";
+import DevelopmentScreen from "../screens/DevelopmentScreen";
 
 const Toolbar: React.FC = () => {
   const Tab = createBottomTabNavigator();
@@ -11,7 +13,7 @@ const Toolbar: React.FC = () => {
     <Tab.Navigator initialRouteName="Files">
       <Tab.Screen
         name="Home"
-        component={FileViewerScreen}
+        component={DevelopmentScreen}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
@@ -31,7 +33,7 @@ const Toolbar: React.FC = () => {
       />
       <Tab.Screen
         name="Create"
-        component={FileViewerScreen}
+        component={DevelopmentScreen}
         options={{
           tabBarLabel: "Create",
           tabBarIcon: ({ color, size }) => (
@@ -41,7 +43,7 @@ const Toolbar: React.FC = () => {
       />
       <Tab.Screen
         name="Photos"
-        component={FileViewerScreen}
+        component={DevelopmentScreen}
         options={{
           tabBarLabel: "Photos",
           tabBarIcon: ({ color, size }) => (
@@ -51,7 +53,7 @@ const Toolbar: React.FC = () => {
       />
       <Tab.Screen
         name="Account"
-        component={FileViewerScreen}
+        component={DevelopmentScreen}
         options={{
           tabBarLabel: "Account",
           tabBarIcon: ({ color, size }) => (
@@ -64,3 +66,7 @@ const Toolbar: React.FC = () => {
 };
 
 export default Toolbar;
+  function useEffect(arg0: () => React.JSX.Element) {
+    throw new Error("Function not implemented.");
+  }
+
