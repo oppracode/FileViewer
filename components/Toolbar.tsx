@@ -8,7 +8,7 @@ const Toolbar: React.FC = () => {
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Files">
       <Tab.Screen
         name="Home"
         component={FileViewerScreen}

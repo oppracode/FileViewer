@@ -9,12 +9,9 @@ import DropboxItem from "../components/DropboxItem";
 const FileViewerScreen: React.FC = () => {
   return (
     <Provider store={store}>
-  
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <DropboxItem/>
-    </View>
+      <View style={styles.container}>
+          <DropboxItem />
+      </View>
     </Provider>
   );
 };
@@ -22,7 +19,7 @@ const FileViewerScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "green",
+    backgroundColor: "#AED9E0",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -1,22 +1,22 @@
-// Your React Native component file
-
 import React, { useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFiles } from '../features/dropboxSlice';
 import { RootState } from '../store';
+
+import FileArea from './FileArea';
 
 const DropboxItem: React.FC = () => {
   const dispatch = useDispatch();
   const dropboxFiles = useSelector((state: RootState) => state.dropbox.files);
 
   useEffect(() => {
-    dispatch(fetchFiles() as any); 
+    dispatch(fetchFiles() as any);
   }, [dispatch]);
 
   return (
     <View>
-      <Text>Number of Files in Dropbox: {dropboxFiles.length}</Text>
+      <FileArea />
     </View>
   );
 };
