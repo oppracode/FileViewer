@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import Toolbar from "./components/NavigationTab";
+import Toolbar from "./src/components/NavigationTab";
 
 const App: React.FC = () => {
   return (
