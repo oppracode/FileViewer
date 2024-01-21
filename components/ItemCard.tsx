@@ -2,6 +2,7 @@ import React from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
+
 interface FileCardProps {
   name: string;
   ".tag": string;
