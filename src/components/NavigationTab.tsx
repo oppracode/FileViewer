@@ -1,63 +1,63 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TouchableOpacity, Alert } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { TouchableOpacity, Alert } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
-import FileViewerScreen from "../screens/FileViewerScreen";
-import DevelopmentScreen from "../screens/DevelopmentScreen";
+import FileViewerScreen from '../screens/FileViewerScreen';
+import DevelopmentScreen from '../screens/DevelopmentScreen';
 
 const Toolbar: React.FC = () => {
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator initialRouteName="Files">
+    <Tab.Navigator initialRouteName='Files'>
       <Tab.Screen
-        name="Home"
+        name='Home'
         component={DevelopmentScreen}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="home" color={color} size={size} />
+            <AntDesign name='home' color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Files"
+        name='Files'
         component={FileViewerScreen}
         options={{
-          tabBarLabel: "Files",
+          tabBarLabel: 'Files',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="folder1" color={color} size={size} />
+            <AntDesign name='folder1' color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Create"
+        name='Create'
         component={DevelopmentScreen}
         options={{
-          tabBarLabel: "Create",
+          tabBarLabel: 'Create',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="pluscircleo" color={color} size={size} />
+            <AntDesign name='pluscircleo' color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Photos"
+        name='Photos'
         component={DevelopmentScreen}
         options={{
-          tabBarLabel: "Photos",
+          tabBarLabel: 'Photos',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="camerao" color={color} size={size} />
+            <AntDesign name='camerao' color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Account"
+        name='Account'
         component={DevelopmentScreen}
         options={{
-          tabBarLabel: "Account",
+          tabBarLabel: 'Account',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="user" color={color} size={size} />
+            <AntDesign name='user' color={color} size={size} />
           ),
         }}
       />
@@ -66,7 +66,6 @@ const Toolbar: React.FC = () => {
 };
 
 export default Toolbar;
-  function useEffect(arg0: () => React.JSX.Element) {
-    throw new Error("Function not implemented.");
-  }
-
+function useEffect(arg0: () => React.JSX.Element) {
+  throw new Error('Function not implemented.');
+}

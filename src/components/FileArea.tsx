@@ -23,7 +23,7 @@ const SectionView: React.FC<{ text: string; files: DropboxFile[] }> = ({
 };
 
 const FileArea: React.FC = () => {
-  const { width, height } = useWindowDimensions();
+  const vw = useWindowDimensions().width;
   const dispatch = useDispatch();
   const dropboxFiles: DropboxFile[] | undefined = useSelector(
     (state: RootState) => state.dropbox.files
@@ -47,7 +47,7 @@ const FileArea: React.FC = () => {
     dropboxFiles?.filter((file) => file.type == FileType.FOLDER) ?? [];
 
   return (
-    <View style={{ ...styles.container, width: width }}>
+    <View style={{ ...styles.container, width: vw }}>
       <SectionView text='Folders' files={folders} />
       <SectionView text='Files' files={files} />
     </View>
