@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchFiles } from '../features/dropboxSlice';
 import { RootState } from '../store/store';
 import { FileCard } from './FileCard';
+import { FileType } from '../types';
 
 const FileArea: React.FC = () => {
   const { width, height } = useWindowDimensions();

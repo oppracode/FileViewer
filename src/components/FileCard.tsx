@@ -1,18 +1,37 @@
 import React from '@react-navigation/native';
-import { StyleSheet, Text, View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { FontAwesome6 } from '@expo/vector-icons';
+import { DropboxFile, FileType } from '../types';
 
 export function FileCard({ file }: { file: DropboxFile }) {
   return (
-    <View style={styles.container}>
-      <AntDesign
-        name={file.type == FileType.FILE ? 'file1' : 'folder1'}
-        size={48}
+    <Pressable
+      style={({ pressed }) => [
+        {
+          ...styles.pressable,
+          backgroundColor: pressed ? '#eee' : '#fff',
+        },
+      ]}
+    >
+      <FontAwesome6
+        name={file.type == FileType.FILE ? 'file' : 'folder'}
+        size={36}
       />
-      <View>
+      <View style={styles.descriptionContainer}>
         <Text style={styles.title}>{file.name}</Text>
+        {file.clientModified != null && (
+          <Text style={styles.description}>
+            {new Date(file.clientModified!).toLocaleString()}
+          </Text>
+        )}
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -22,13 +41,27 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     padding: 8,
   },
+  descriptionContainer: {
+    flexDirection: 'column',
+    rowGap: 2,
+  },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 4,
+    lineHeight: 20,
+    fontWeight: '500',
+    color: '#0d0d0dFF',
   },
   description: {
-    fontSize: 14,
-    color: '#888888',
+    fontSize: 12,
+    lineHeight: 16,
+    color: '#0d0d0d50',
+  },
+  pressable: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });
