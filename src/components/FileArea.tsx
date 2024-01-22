@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
+import { View, Text, StyleSheet, useWindowDimensions, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFiles } from '../features/dropboxSlice';
 import { RootState } from '../store/store';
 import { FileCard } from './FileCard';
 import { DropboxFile, FileType } from '../types';
+import { selectLoading } from '../features/loadingSlice';
 
 const SectionView: React.FC<{ text: string; files: DropboxFile[] }> = React.memo(({ text, files }) => {
   console.log('SectionView re-rendered'); // Check if this logs when the Redux state changes
@@ -27,12 +28,13 @@ const FileArea: React.FC = () => {
   const dropboxFiles: DropboxFile[] | undefined = useSelector(
     (state: RootState) => state.dropbox.files
   );
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(fetchFiles() as any);
   }, [dispatch]);
 
-  if (dropboxFiles === undefined || dropboxFiles.length === 0) {
+  if ((dropboxFiles === undefined || dropboxFiles.length === 0) && !loading) {
     return (
       <View style={styles.empty}>
         <Text>No files found. Care to add one?</Text>
@@ -47,8 +49,14 @@ const FileArea: React.FC = () => {
 
   return (
     <View style={{ ...styles.container, width: vw }}>
-      <SectionView text='Folders' files={folders} />
-      <SectionView text='Files' files={files} />
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <View>
+          <SectionView text='Folders' files={folders} />
+          <SectionView text='Files' files={files} />
+        </View>
+      )}
     </View>
   );
 };

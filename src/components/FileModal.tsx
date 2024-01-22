@@ -7,6 +7,7 @@ import { AppDispatch } from '../store/store';
 import { deleteFile, fetchFiles } from '../features/dropboxSlice';
 
 import Modal from 'react-native-modal';
+import { setLoading } from '../features/loadingSlice';
 
 export function FileModal({
   isVisible,
@@ -22,6 +23,7 @@ export function FileModal({
   const deleteSelectedFile = () => {
     dispatch(deleteFile(file.path));
     onClose();
+    //dispatch(setLoading(true));
     dispatch(fetchFiles() as any);
   };
 

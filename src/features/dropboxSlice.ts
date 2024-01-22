@@ -7,6 +7,7 @@ import {
   FileType,
   FetchFilesResponse,
 } from '../types';
+import { setLoading } from './loadingSlice';
 
 
 const DROPBOX_API_URL = 'https://api.dropboxapi.com/2/';
@@ -35,8 +36,13 @@ function toDropboxFile(file: DropboxFileRaw): DropboxFile {
 
 export const fetchFiles = createAsyncThunk(
   'dropbox/fetchFiles',
-  async (_, __): Promise<DropboxFile[]> => {
+  async (_, thunkAPI): Promise<DropboxFile[]> => {
+    
     try {
+      thunkAPI.dispatch(setLoading(true)); 
+
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
       const response = await axios.post<FetchFilesResponse>(
         `${DROPBOX_API_URL}files/list_folder`,
         {
@@ -51,6 +57,7 @@ export const fetchFiles = createAsyncThunk(
           },
         }
       );
+      thunkAPI.dispatch(setLoading(false)); 
       return response.data.entries.map(toDropboxFile);
     } catch (error) {
       console.error(error);
