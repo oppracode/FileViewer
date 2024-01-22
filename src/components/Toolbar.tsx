@@ -1,47 +1,85 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
+ import {
+   View,
+   StyleSheet,
+   TouchableOpacity,
+   Text,
+   Alert,
+   FlatList,
+ } from 'react-native';
 
-const Toolbar: React.FC = () => {
-  const showAlert = () => {
-    Alert.alert('Still in Development', 'This feature is still in development.');
-  };
+ const ToolbarButton: React.FC<{ text: string }> = ({ text }) => {
+   if (text.length === 0) {
+     return <></>;
+   }
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={showAlert}>
-        <Text style={styles.buttonText}>Button 1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={showAlert}>
-        <Text style={styles.buttonText}>Button 2</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={showAlert}>
-        <Text style={styles.buttonText}>Button 3</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+   const showAlert = () => {
+     Alert.alert(
+       'Still in Development',
+       `${text} feature is still in development.`
+     );
+   };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between', 
-    alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 16, 
-  },
-  button: {
-    flex: 1, 
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-    marginHorizontal: 8, 
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#007EE5',
-  },
-});
+   return (
+     <TouchableOpacity
+       onPress={showAlert}
+       style={styles.button}
+       activeOpacity={0.4}
+     >
+       <Text style={styles.buttonText}>{text}</Text>
+     </TouchableOpacity>
+   );
+ };
 
-export default Toolbar;
+ const buttons = ['Share', 'Upload', 'Folder', 'Scan'];
+
+ const Toolbar: React.FC = () => {
+   return (
+     <FlatList
+       //style={styles.buttonList}
+       contentContainerStyle={styles.buttonList}
+       data={buttons}
+       renderItem={({ item }) => <ToolbarButton text={item} />}
+       keyExtractor={(item) => item}
+       ItemSeparatorComponent={() => <View style={{ width: 8 }}></View>}
+       horizontal={true}
+     ></FlatList>
+     /*<View style={styles.container}>
+       {buttons.map((buttonText) => (
+         <TouchableOpacity style={styles.button} onPress={showAlert}>
+           <Text style={styles.buttonText}>buttonText</Text>
+         </TouchableOpacity>
+       ))}
+     </View>*/
+   );
+ };
+
+ const styles = StyleSheet.create({
+   container: {
+     flexDirection: 'row',
+     justifyContent: 'space-between',
+     alignItems: 'center',
+     paddingVertical: 16,
+     paddingHorizontal: 16,
+   },
+   button: {
+     backgroundColor: '#FFFFFF',
+     paddingHorizontal: 16,
+     paddingVertical: 12,
+     borderRadius: 4,
+   },
+   buttonText: {
+     fontSize: 18,
+     lineHeight: 20,
+     fontWeight: 'bold',
+     color: '#007EE5',
+   },
+   buttonList: {
+     paddingHorizontal: 16,
+     paddingVertical: 8,
+     height: 'auto',
+     alignItems: 'flex-start',
+   },
+ });
+
+ export default Toolbar;
