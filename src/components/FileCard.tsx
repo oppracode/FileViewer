@@ -1,11 +1,5 @@
 import React from '@react-navigation/native';
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { DropboxFile, FileType } from '../types';
 import { useDispatch } from 'react-redux';
@@ -15,11 +9,11 @@ import { deleteFile, fetchFiles } from '../features/dropboxSlice';
 export function FileCard({ file }: { file: DropboxFile }) {
   const dispatch: AppDispatch = useDispatch();
   const handlePress = () => {
-      dispatch(deleteFile(file.path));
-      console.log(`deleted: ${file.path}`);
-      dispatch(fetchFiles() as any);
+    dispatch(deleteFile(file.path));
+    console.log(`deleted: ${file.path}`);
+    dispatch(fetchFiles() as any);
   };
-        
+
   return (
     <Pressable
       style={({ pressed }) => [
@@ -28,35 +22,67 @@ export function FileCard({ file }: { file: DropboxFile }) {
           backgroundColor: pressed ? '#eee' : '#fff',
         },
       ]}
-      onPress={handlePress}
+      //onPress={handlePress}
     >
-      <View style={styles.fileIcon}>
-        <FontAwesome6
-          name={file.type == FileType.FILE ? 'file' : 'folder'}
-          size={32}
-        />
-      </View>
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.title}>{file.name}</Text>
-        {file.clientModified != null && (
-          <Text style={styles.description}>
-            {new Date(file.clientModified!).toLocaleString()}
+      <View style={styles.content}>
+        <View style={styles.fileIcon}>
+          <FontAwesome6
+            name={file.type == FileType.FILE ? 'file' : 'folder'}
+            size={32}
+          />
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text ellipsizeMode='tail' numberOfLines={1} style={styles.title}>
+            {file.name}
           </Text>
-        )}
+          {file.clientModified != null && (
+            <Text style={styles.description}>
+              {new Date(file.clientModified!).toLocaleString()}
+            </Text>
+          )}
+        </View>
       </View>
+      <Pressable
+        style={({ pressed }) => [
+          {
+            ...styles.button,
+            backgroundColor: pressed ? '#eee' : 'transparent',
+          },
+        ]}
+      >
+        <FontAwesome6 name='ellipsis' size={24} color='#0d0d0d' />
+      </Pressable>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  pressable: {
+    width: '100%',
     flexDirection: 'row',
-    alignItems: 'stretch',
-    padding: 8,
+    alignItems: 'center',
+    columnGap: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 16,
+    flex: 1,
+  },
+  button: {
+    marginLeft: 8,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   descriptionContainer: {
     flexDirection: 'column',
     rowGap: 2,
+    flex: 1,
   },
   title: {
     fontSize: 16,
@@ -68,14 +94,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 16,
     color: '#0d0d0d50',
-  },
-  pressable: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
   },
   fileIcon: {
     width: 36,
