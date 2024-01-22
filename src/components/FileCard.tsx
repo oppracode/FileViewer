@@ -8,8 +8,20 @@ import {
 } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { DropboxFile, FileType } from '../types';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store/store';
+import { deleteFile, fetchFiles } from '../features/dropboxSlice';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { useMemo, useRef } from 'react';
 
 export function FileCard({ file }: { file: DropboxFile }) {
+  const dispatch: AppDispatch = useDispatch();
+  const handlePress = () => {
+      dispatch(deleteFile(file.path));
+      console.log(`deleted: ${file.path}`);
+      dispatch(fetchFiles() as any);
+  };
+        
   return (
     <Pressable
       style={({ pressed }) => [
@@ -18,6 +30,7 @@ export function FileCard({ file }: { file: DropboxFile }) {
           backgroundColor: pressed ? '#eee' : '#fff',
         },
       ]}
+      onPress={handlePress}
     >
       <View style={styles.fileIcon}>
         <FontAwesome6

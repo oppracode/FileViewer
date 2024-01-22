@@ -18,6 +18,7 @@ interface DropboxFile {
   size: number | null;
   serverModified: string | null;
   clientModified: string | null;
+  path: string;
 }
 
 interface DropboxFileRaw {
@@ -28,6 +29,7 @@ interface DropboxFileRaw {
   size: number | undefined;
   server_modified: string | undefined;
   client_modified: string | undefined;
+  path_lower: string;
 }
 
 interface FetchFilesResponse {
