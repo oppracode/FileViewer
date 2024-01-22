@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFiles } from '../features/dropboxSlice';
 import { RootState } from '../store/store';
-
-import FileCard from './ItemCard';
-
-interface DropboxFile {
-  name: string;
-  id: string;
-  '.tag': string;
-}
+import { FileCard } from './FileCard';
 
 const FileArea: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,30 +17,24 @@ const FileArea: React.FC = () => {
     return <View style={styles.container}></View>;
   }
 
-  const files = dropboxFiles.filter((file) => file['.tag'] === 'file');
-  const folders = dropboxFiles.filter((file) => file['.tag'] === 'folder');
+  console.log(dropboxFiles);
 
-  const renderItem = ({ item }) => <FileCard {...item} />;
+  const files = dropboxFiles.filter((file) => file.type == FileType.FILE);
+  const folders = dropboxFiles.filter((file) => file.type == FileType.FOLDER);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>FILES: {files.length}</Text>
+      <Text style={styles.title}>Files</Text>
       <View style={styles.fileListContainer}>
-        <FlatList
-          data={files}
-          renderItem={renderItem}
-          keyExtractor={(_, index) => index.toString()}
-          numColumns={3}
-        />
+        {files.map((file) => (
+          <FileCard file={file} key={file.id} />
+        ))}
       </View>
-      <Text style={styles.title}>FOLDERS: {folders.length}</Text>
+      <Text style={styles.title}>Folders</Text>
       <View style={styles.fileListContainer}>
-        <FlatList
-          data={folders}
-          renderItem={renderItem}
-          keyExtractor={(_, index) => index.toString()}
-          numColumns={3}
-        />
+        {folders.map((folder) => (
+          <FileCard file={folder} key={folder.id} />
+        ))}
       </View>
     </View>
   );
@@ -64,7 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   fileListContainer: {
-    padding: 16,
+    width: '100%',
   },
 });
 

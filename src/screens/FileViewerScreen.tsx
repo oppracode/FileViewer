@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
-import store from '../store/store';
+import { store } from '../store/store';
 
 import DropboxItem from '../components/DropboxItem';
 import DropboxButtons from '../components/Toolbar';
@@ -10,8 +10,10 @@ import DropboxButtons from '../components/Toolbar';
 const FileViewerScreen: React.FC = () => {
   return (
     <Provider store={store}>
-      <ScrollView style={styles.container}>
-        <StatusBar style='auto' />
+      <ScrollView
+        style={styles.container}
+        StickyHeaderComponent={() => <StatusBar style='auto' />}
+      >
         <DropboxButtons />
         <View style={styles.content}>
           <DropboxItem />
@@ -23,8 +25,7 @@ const FileViewerScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#AED9E0',
+    //flex: 1,
   },
   content: {
     flex: 1,
