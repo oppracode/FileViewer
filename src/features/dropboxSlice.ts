@@ -30,6 +30,7 @@ export const fetchFiles = createAsyncThunk(
         {
           path: '',
           recursive: true,
+          include_deleted: false,
         },
         {
           headers: {
@@ -41,6 +42,7 @@ export const fetchFiles = createAsyncThunk(
 
       return response.data.entries.map(toDropboxFile);
     } catch (error) {
+      console.error(error);
       return [];
     }
   }
