@@ -10,10 +10,8 @@ import DropboxButtons from '../components/Toolbar';
 const FileViewerScreen: React.FC = () => {
   return (
     <Provider store={store}>
-      <ScrollView
-        style={styles.container}
-        StickyHeaderComponent={() => <StatusBar style='auto' />}
-      >
+      <StatusBar style='auto' />
+      <ScrollView style={styles.container}>
         <DropboxButtons />
         <View style={styles.content}>
           <DropboxItem />
