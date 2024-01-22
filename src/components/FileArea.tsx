@@ -4,40 +4,52 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchFiles } from '../features/dropboxSlice';
 import { RootState } from '../store/store';
 import { FileCard } from './FileCard';
-import { FileType } from '../types';
+import { DropboxFile, FileType } from '../types';
+
+const SectionView: React.FC<{ text: string; files: DropboxFile[] }> = ({
+  text,
+  files,
+}) => {
+  return (
+    <View style={styles.sectionView}>
+      <Text style={styles.title}>{text}</Text>
+      <View style={styles.fileListContainer}>
+        {files.map((file) => (
+          <FileCard file={file} key={file.id} />
+        ))}
+      </View>
+    </View>
+  );
+};
 
 const FileArea: React.FC = () => {
   const { width, height } = useWindowDimensions();
   const dispatch = useDispatch();
-  const dropboxFiles = useSelector((state: RootState) => state.dropbox.files);
+  const dropboxFiles: DropboxFile[] | undefined = useSelector(
+    (state: RootState) => state.dropbox.files
+  );
 
   useEffect(() => {
     dispatch(fetchFiles() as any);
   }, [dispatch]);
 
   if (dropboxFiles === undefined || dropboxFiles.length === 0) {
-    return <View style={styles.container}></View>;
+    return (
+      <View style={styles.empty}>
+        <Text>No files found. Care to add one?</Text>
+      </View>
+    );
   }
 
-  console.log(dropboxFiles);
-
-  const files = dropboxFiles.filter((file) => file.type == FileType.FILE);
-  const folders = dropboxFiles.filter((file) => file.type == FileType.FOLDER);
+  const files =
+    dropboxFiles?.filter((file) => file.type == FileType.FILE) ?? [];
+  const folders =
+    dropboxFiles?.filter((file) => file.type == FileType.FOLDER) ?? [];
 
   return (
     <View style={{ ...styles.container, width: width }}>
-      <Text style={styles.title}>Files</Text>
-      <View style={styles.fileListContainer}>
-        {files.map((file) => (
-          <FileCard file={file} key={file.id} />
-        ))}
-      </View>
-      <Text style={styles.title}>Folders</Text>
-      <View style={styles.fileListContainer}>
-        {folders.map((folder) => (
-          <FileCard file={folder} key={folder.id} />
-        ))}
-      </View>
+      <SectionView text='Folders' files={folders} />
+      <SectionView text='Files' files={files} />
     </View>
   );
 };
@@ -47,14 +59,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
+    color: '#0d0d0d',
     fontWeight: 'bold',
-    marginBottom: 12,
+    marginBottom: 8,
     paddingHorizontal: 16,
   },
   fileListContainer: {
     width: '100%',
   },
+  empty: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sectionView: { marginTop: 16 },
 });
 
 export default FileArea;
