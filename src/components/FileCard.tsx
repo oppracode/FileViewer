@@ -11,8 +11,6 @@ import { DropboxFile, FileType } from '../types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store/store';
 import { deleteFile, fetchFiles } from '../features/dropboxSlice';
-import BottomSheet from '@gorhom/bottom-sheet';
-import { useMemo, useRef } from 'react';
 
 export function FileCard({ file }: { file: DropboxFile }) {
   const dispatch: AppDispatch = useDispatch();
