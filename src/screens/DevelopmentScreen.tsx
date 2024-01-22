@@ -12,7 +12,7 @@ import React from 'react';
  const styles = StyleSheet.create({
    container: {
      flex: 1,
-     backgroundColor: '#AED9E0',
+     backgroundColor: '#f5f5f5',
      alignItems: 'center',
      justifyContent: 'center',
    },
