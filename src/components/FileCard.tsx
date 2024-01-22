@@ -19,10 +19,12 @@ export function FileCard({ file }: { file: DropboxFile }) {
         },
       ]}
     >
-      <FontAwesome6
-        name={file.type == FileType.FILE ? 'file' : 'folder'}
-        size={36}
-      />
+      <View style={styles.fileIcon}>
+        <FontAwesome6
+          name={file.type == FileType.FILE ? 'file' : 'folder'}
+          size={32}
+        />
+      </View>
       <View style={styles.descriptionContainer}>
         <Text style={styles.title}>{file.name}</Text>
         {file.clientModified != null && (
@@ -60,8 +62,15 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    columnGap: 12,
+    columnGap: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  fileIcon: {
+    width: 36,
+    height: 36,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
