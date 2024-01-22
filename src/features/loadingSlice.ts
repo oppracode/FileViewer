@@ -1,4 +1,3 @@
-// loadingSlice.ts
 
 import { createSlice } from '@reduxjs/toolkit';
 
