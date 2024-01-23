@@ -8,7 +8,6 @@ import { DropboxFile, FileType } from '../types';
 import { selectLoading } from '../features/loadingSlice';
 
 const SectionView: React.FC<{ text: string; files: DropboxFile[] }> = React.memo(({ text, files }) => {
-  console.log('SectionView re-rendered'); // Check if this logs when the Redux state changes
   return (
     <View style={styles.sectionView}>
       <Text style={styles.title}>{text}</Text>
