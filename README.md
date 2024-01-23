@@ -6,7 +6,7 @@ This app was tested with my own API access token, and it likely won't be valid w
 
 App.tsx - The main entry point of this application. It uses NavigationContainer to wrap the Toolbar component.
 
-store.tx - File that configures Redux store that is being used to make API calls and display 'loading'icon while the app is waiting for response.
+store.ts - File that configures Redux store that is being used to make API calls and display 'loading'icon while the app is waiting for response.
 
 loadingSlice.ts - File that manages loading state. This state is used only to display loading icon on the screen.
 
