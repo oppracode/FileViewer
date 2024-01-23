@@ -1,8 +1,13 @@
 This app was made to check and modify(delete files) a dropbox account.
+
 Important note: an API access key for a dropbox account should be entered into an .env file. Dropbox account should have permission for writing files.
+
 This app was built using expo, so getting it running should not be any different from any other expo app. Clone this repository, npm install and then build the app(npx expo start, for example) as you desire. 
+
 Expo was chosen instead of Native CLI, because I find it easier to develop with expo. While it may create some additional issues, such as some native libraries not being supported, it also streamlines and simplifies app testing.
+
 This app was tested with my own API access token, and it likely won't be valid when you start testing the app, so feel free to change it to your own.
+_________
 
 App.tsx - The main entry point of this application. It uses NavigationContainer to wrap the Toolbar component.
 
