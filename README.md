@@ -31,3 +31,5 @@ FileViewerScreen.tsx - Component, a screen, that is responsible for our main scr
 DevelopmentScreen.tsx - Component, a screen, that is shown when user clicks any navigation tab except 'Files'. Serves as a stub screen.
 
 .env - File that contains user's API access token, should be change to a working one when this app is being tested.
+
+https://github.com/oppracode/FileViewer/assets/133806414/d4986c8b-e536-496c-bdae-bf78fcedd3ed
